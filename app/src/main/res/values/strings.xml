@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">RtmpDump4Android</string>
+    <string name="app_name">RtmpDemo</string>
+    <string name="input_size">请选择视频尺寸</string>
 </resources>

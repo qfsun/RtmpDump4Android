@@ -2,7 +2,7 @@ package com.wtoe.rtmpdump4android.flv;
 
 import android.media.MediaCodec;
 
-import com.wtoe.rtmptest.LogUtil;
+import com.wtoe.rtmpdump4android.LogUtil;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
