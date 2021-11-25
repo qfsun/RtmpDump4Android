@@ -1,0 +1,2 @@
+# RtmpDump4Android
+Android采集相机数据，MediaCodec编码H264，封装flv格式，基于rtmpdump推送rtmp数据至流媒体服务器
