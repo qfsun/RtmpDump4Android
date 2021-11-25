@@ -1,4 +1,4 @@
-package com.wtoe.rtmptest;
+package com.wtoe.rtmpdump4android;
 
 import android.graphics.ImageFormat;
 import android.hardware.Camera;
@@ -16,8 +16,8 @@ import androidx.annotation.NonNull;
 import com.wtoe.libyuv.YuvUtils;
 import com.wtoe.osd.YuvOsdUtils;
 import com.wtoe.rtmp.RtmpHandle;
-import com.wtoe.rtmptest.flv.FlvPacker;
-import com.wtoe.rtmptest.flv.Packer;
+import com.wtoe.rtmpdump4android.flv.FlvPacker;
+import com.wtoe.rtmpdump4android.flv.Packer;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -92,9 +92,9 @@ public class CameraHelper {
      * 设置参数
      */
     public CameraHelper(SurfaceView surfaceView, String rtmpUrl) {
-        this.m_CameraId = Constants.VIDEO_CAMERA_ID;
+        this.m_CameraId = com.wtoe.rtmptest.Constants.VIDEO_CAMERA_ID;
         this.url = rtmpUrl;
-        I420 = new byte[Constants.VIDEO_WIDTH * Constants.VIDEO_HEIGHT * 3 / 2];
+        I420 = new byte[com.wtoe.rtmptest.Constants.VIDEO_WIDTH * com.wtoe.rtmptest.Constants.VIDEO_HEIGHT * 3 / 2];
         if (m_CameraId == Camera.CameraInfo.CAMERA_FACING_FRONT) {
 //            前置摄像头需要旋转270°
             rotateDegree = 270;
@@ -135,14 +135,14 @@ public class CameraHelper {
      */
     private synchronized void startPreview() {
         if (mCamera != null && !isRunning) {
-            LogUtil.d(TAG, "startPreview");
+            com.wtoe.rtmptest.LogUtil.d(TAG, "startPreview");
             isRunning = true;
             startRtmpPush();
 //            String pattern = "yyyy年MM月dd日 HH:mm:ss";//日期格式 年月日
             String pattern = "yyyy-MM-dd HH:mm:ss";//日期格式
             mFormat = new SimpleDateFormat(pattern, Locale.CHINA);
             yuvHander = 0;
-            yuvHander = YuvOsdUtils.initOsd(20, 50, pattern.length(), Constants.VIDEO_HEIGHT);
+            yuvHander = YuvOsdUtils.initOsd(20, 50, pattern.length(), com.wtoe.rtmptest.Constants.VIDEO_HEIGHT);
 
             int previewFormat = mCamera.getParameters().getPreviewFormat();
             Camera.Size previewSize = mCamera.getParameters().getPreviewSize();
@@ -162,7 +162,7 @@ public class CameraHelper {
                                 outData = new byte[data.length];
                             }
 //                            NV21转I420，镜像、旋转90度
-                            YuvUtils.compressYUV(data, Constants.VIDEO_WIDTH,Constants.VIDEO_HEIGHT, I420, Constants.VIDEO_WIDTH,Constants.VIDEO_HEIGHT, 0, rotateDegree, false);
+                            YuvUtils.compressYUV(data, com.wtoe.rtmptest.Constants.VIDEO_WIDTH, com.wtoe.rtmptest.Constants.VIDEO_HEIGHT, I420, com.wtoe.rtmptest.Constants.VIDEO_WIDTH, com.wtoe.rtmptest.Constants.VIDEO_HEIGHT, 0, rotateDegree, false);
 //                            outData = I420;
 //                            if (yuvHander != 0) {
 ////                                添加水印
@@ -182,14 +182,14 @@ public class CameraHelper {
                             addDataToQueue(I420);
                             encodeCount++;
                             if (encodeCount % 50 == 1) {
-                                LogUtil.w("编码第:" + encodeCount + "帧，耗时:" + (System.currentTimeMillis() - encodeTime));
+                                com.wtoe.rtmptest.LogUtil.w("编码第:" + encodeCount + "帧，耗时:" + (System.currentTimeMillis() - encodeTime));
                             }
                         }
                     });
                     mCamera.addCallbackBuffer(data);
                     count++;
                     if (count % 50 == 1) {
-                        LogUtil.d("采集第:" + (count) + "帧，距上一帧间隔时间:" + (endTime - previewTime) + "  " + Thread.currentThread().getName());
+                        com.wtoe.rtmptest.LogUtil.d("采集第:" + (count) + "帧，距上一帧间隔时间:" + (endTime - previewTime) + "  " + Thread.currentThread().getName());
                     }
                     previewTime = endTime;
                 }
@@ -203,7 +203,7 @@ public class CameraHelper {
         }
         if (nv12Queue.size() >= queueSize) {
             nv12Queue.poll();
-            LogUtil.e(TAG, "lostPacket");
+            com.wtoe.rtmptest.LogUtil.e(TAG, "lostPacket");
         }
         nv12Queue.add(data);
     }
@@ -270,16 +270,16 @@ public class CameraHelper {
             mCamera = Camera.open(m_CameraId);
             Camera.Parameters parameters = mCamera.getParameters();
             //设置预览帧率
-            parameters.setPreviewFrameRate(Constants.VIDEO_FRAMERATE);
+            parameters.setPreviewFrameRate(com.wtoe.rtmptest.Constants.VIDEO_FRAMERATE);
             mCamera.setDisplayOrientation(90);
             Camera.CameraInfo camInfo = new Camera.CameraInfo();
             Camera.getCameraInfo(m_CameraId, camInfo);
             parameters.setPictureFormat(ImageFormat.NV21);
             parameters.setPreviewFormat(ImageFormat.NV21);
-            Camera.Size size = getBestPreviewSize(Constants.VIDEO_WIDTH, Constants.VIDEO_HEIGHT, parameters);
+            Camera.Size size = getBestPreviewSize(com.wtoe.rtmptest.Constants.VIDEO_WIDTH, com.wtoe.rtmptest.Constants.VIDEO_HEIGHT, parameters);
             if (size != null) {
-                Constants.VIDEO_WIDTH = size.width;
-                Constants.VIDEO_HEIGHT = size.height;
+                com.wtoe.rtmptest.Constants.VIDEO_WIDTH = size.width;
+                com.wtoe.rtmptest.Constants.VIDEO_HEIGHT = size.height;
                 //设置预览图像分辨率
                 parameters.setPreviewSize(size.width, size.height);
                 parameters.setPictureSize(size.width, size.height);
@@ -290,7 +290,7 @@ public class CameraHelper {
             }
             if (mFlvPacker == null) {
                 mFlvPacker = new FlvPacker();
-                mFlvPacker.initVideoParams(Constants.VIDEO_WIDTH, Constants.VIDEO_HEIGHT, Constants.VIDEO_FRAMERATE);
+                mFlvPacker.initVideoParams(com.wtoe.rtmptest.Constants.VIDEO_WIDTH, com.wtoe.rtmptest.Constants.VIDEO_HEIGHT, com.wtoe.rtmptest.Constants.VIDEO_FRAMERATE);
                 mFlvPacker.setPacketListener(new Packer.OnPacketListener() {
                     @Override
                     public void onPacket(final byte[] data, final int packetType) {
@@ -300,13 +300,13 @@ public class CameraHelper {
                                 pushTime = System.currentTimeMillis();
                                 pushCount++;
                                 if (pushCount % 50 == 1) {
-                                    LogUtil.w("FlvPacker onPacket");
+                                    com.wtoe.rtmptest.LogUtil.w("FlvPacker onPacket");
                                 }
                                 if (rtmp_Conn) {
                                     int ret = RtmpHandle.getInstance().pushFlvData(rtmpHandle, data, data.length);
                                     if (encodeCount % 50 == 1) {
-                                        LogUtil.w("推送第:" + (encodeCount++) + "帧，耗时:" + (System.currentTimeMillis() - encodeTime));
-                                        LogUtil.w("推送RTMP  type：" + packetType + "  length:" + data.length + "  推流结果:" + ret);
+                                        com.wtoe.rtmptest.LogUtil.w("推送第:" + (encodeCount++) + "帧，耗时:" + (System.currentTimeMillis() - encodeTime));
+                                        com.wtoe.rtmptest.LogUtil.w("推送RTMP  type：" + packetType + "  length:" + data.length + "  推流结果:" + ret);
                                     }
                                 }
                             }
@@ -337,7 +337,7 @@ public class CameraHelper {
                 if (rtmpHandle != 0) {
                     rtmp_Conn = true;
                 } else {
-                    LogUtil.w("RTMP连接失败: " + rtmpHandle);
+                    com.wtoe.rtmptest.LogUtil.w("RTMP连接失败: " + rtmpHandle);
                 }
             }
         });
@@ -348,17 +348,17 @@ public class CameraHelper {
      */
     private void initMediaCodec() {
         try {
-            LogUtil.d(TAG, "initMediaCodec");
+            com.wtoe.rtmptest.LogUtil.d(TAG, "initMediaCodec");
             mEncoder = MediaCodec.createEncoderByType(mime);
-            if (Constants.VIDEO_BITRATE == 0) {
-                Constants.VIDEO_BITRATE = 2 * Constants.VIDEO_WIDTH * Constants.VIDEO_HEIGHT * Constants.VIDEO_FRAMERATE / 20;
+            if (com.wtoe.rtmptest.Constants.VIDEO_BITRATE == 0) {
+                com.wtoe.rtmptest.Constants.VIDEO_BITRATE = 2 * com.wtoe.rtmptest.Constants.VIDEO_WIDTH * com.wtoe.rtmptest.Constants.VIDEO_HEIGHT * com.wtoe.rtmptest.Constants.VIDEO_FRAMERATE / 20;
             }
 
             MediaFormat mediaFormat;
 //            旋转90度，这里的宽高就要变换一下
-            mediaFormat = MediaFormat.createVideoFormat(mime, Constants.VIDEO_HEIGHT, Constants.VIDEO_WIDTH);
-            mediaFormat.setInteger(MediaFormat.KEY_BIT_RATE, Constants.VIDEO_BITRATE);
-            mediaFormat.setInteger(MediaFormat.KEY_FRAME_RATE, Constants.VIDEO_FRAMERATE);
+            mediaFormat = MediaFormat.createVideoFormat(mime, com.wtoe.rtmptest.Constants.VIDEO_HEIGHT, com.wtoe.rtmptest.Constants.VIDEO_WIDTH);
+            mediaFormat.setInteger(MediaFormat.KEY_BIT_RATE, com.wtoe.rtmptest.Constants.VIDEO_BITRATE);
+            mediaFormat.setInteger(MediaFormat.KEY_FRAME_RATE, com.wtoe.rtmptest.Constants.VIDEO_FRAMERATE);
             mediaFormat.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420Flexible);
             mediaFormat.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, 1);
             mediaFormat.setInteger(MediaFormat.KEY_BITRATE_MODE, MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_VBR);
@@ -435,7 +435,7 @@ public class CameraHelper {
      * 计算视频pts
      */
     private long computePresentationTime(long frameIndex) {
-        return 132 + frameIndex * 1000000 / Constants.VIDEO_FRAMERATE;
+        return 132 + frameIndex * 1000000 / com.wtoe.rtmptest.Constants.VIDEO_FRAMERATE;
     }
 
     /**
@@ -491,7 +491,7 @@ public class CameraHelper {
      * 停止预览
      */
     private synchronized void stopPreview() {
-        LogUtil.e(TAG, "--stopPreview--\r\n");
+        com.wtoe.rtmptest.LogUtil.e(TAG, "--stopPreview--\r\n");
         if (mCamera != null) {
             mCamera.stopPreview();
             mCamera.setPreviewCallbackWithBuffer(null);
@@ -502,7 +502,7 @@ public class CameraHelper {
      * 销毁Camera
      */
     private synchronized void destroyCamera() {
-        LogUtil.e(TAG, "--destroyCamera--\r\n");
+        com.wtoe.rtmptest.LogUtil.e(TAG, "--destroyCamera--\r\n");
         try {
             if (null != mCamera) {
                 mCamera.setPreviewCallback(null);

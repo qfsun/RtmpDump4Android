@@ -1,4 +1,4 @@
-package com.wtoe.rtmptest;
+package com.wtoe.rtmpdump4android;
 
 import android.Manifest;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.wtoe.rtmptest.permission.PermissionHelper;
-import com.wtoe.rtmptest.permission.PermissionInterface;
+import com.wtoe.rtmpdump4android.permission.PermissionHelper;
+import com.wtoe.rtmpdump4android.permission.PermissionInterface;
 
 public class SplashActivity extends AppCompatActivity implements PermissionInterface {
 

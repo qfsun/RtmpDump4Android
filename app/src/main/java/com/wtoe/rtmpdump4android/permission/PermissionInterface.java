@@ -1,4 +1,4 @@
-package com.wtoe.rtmptest.permission;
+package com.wtoe.rtmpdump4android.permission;
 
 /**
  * author：create by Administrator on 2019/7/23

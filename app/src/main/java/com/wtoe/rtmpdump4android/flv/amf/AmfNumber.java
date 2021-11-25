@@ -1,4 +1,4 @@
-package com.wtoe.rtmptest.flv.amf;
+package com.wtoe.rtmpdump4android.flv.amf;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
  * @Version
  */
 
-public class AmfNumber implements AmfData{
+public class AmfNumber implements AmfData {
     double value;
     /** Size of an AMF number, in bytes (including type bit) */
     public static final int SIZE = 9;

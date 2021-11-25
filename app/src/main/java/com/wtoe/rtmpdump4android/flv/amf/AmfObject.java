@@ -1,4 +1,4 @@
-package com.wtoe.rtmptest.flv.amf;
+package com.wtoe.rtmpdump4android.flv.amf;
 
 import java.io.BufferedInputStream;
 import java.io.IOException;
@@ -33,7 +33,7 @@ public class AmfObject implements AmfData {
     }
 
     public void setProperty(String key, boolean value) {
-        properties.put(key, new AmfBoolean(value));
+        properties.put(key, new com.wtoe.rtmpdump4android.flv.amf.AmfBoolean(value));
     }
 
     public void setProperty(String key, String value) {
@@ -41,11 +41,11 @@ public class AmfObject implements AmfData {
     }
 
     public void setProperty(String key, int value) {
-        properties.put(key, new AmfNumber(value));
+        properties.put(key, new com.wtoe.rtmpdump4android.flv.amf.AmfNumber(value));
     }
 
     public void setProperty(String key, double value) {
-        properties.put(key, new AmfNumber(value));
+        properties.put(key, new com.wtoe.rtmpdump4android.flv.amf.AmfNumber(value));
     }
 
     @Override

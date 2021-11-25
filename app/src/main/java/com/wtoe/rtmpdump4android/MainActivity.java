@@ -1,4 +1,4 @@
-package com.wtoe.rtmptest;
+package com.wtoe.rtmpdump4android;
 
 import android.content.Context;
 import android.content.SharedPreferences;

@@ -1,4 +1,4 @@
-package com.wtoe.rtmptest.permission;
+package com.wtoe.rtmpdump4android.permission;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;

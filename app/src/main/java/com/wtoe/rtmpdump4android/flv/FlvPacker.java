@@ -1,17 +1,17 @@
-package com.wtoe.rtmptest.flv;
+package com.wtoe.rtmpdump4android.flv;
 
 import android.annotation.TargetApi;
 import android.media.MediaCodec;
 
 import java.nio.ByteBuffer;
 
-import static com.wtoe.rtmptest.flv.FlvPackerHelper.AUDIO_HEADER_SIZE;
-import static com.wtoe.rtmptest.flv.FlvPackerHelper.AUDIO_SPECIFIC_CONFIG_SIZE;
-import static com.wtoe.rtmptest.flv.FlvPackerHelper.FLV_HEAD_SIZE;
-import static com.wtoe.rtmptest.flv.FlvPackerHelper.FLV_TAG_HEADER_SIZE;
-import static com.wtoe.rtmptest.flv.FlvPackerHelper.PRE_SIZE;
-import static com.wtoe.rtmptest.flv.FlvPackerHelper.VIDEO_HEADER_SIZE;
-import static com.wtoe.rtmptest.flv.FlvPackerHelper.VIDEO_SPECIFIC_CONFIG_EXTEND_SIZE;
+import static com.wtoe.rtmpdump4android.flv.FlvPackerHelper.AUDIO_HEADER_SIZE;
+import static com.wtoe.rtmpdump4android.flv.FlvPackerHelper.AUDIO_SPECIFIC_CONFIG_SIZE;
+import static com.wtoe.rtmpdump4android.flv.FlvPackerHelper.FLV_HEAD_SIZE;
+import static com.wtoe.rtmpdump4android.flv.FlvPackerHelper.FLV_TAG_HEADER_SIZE;
+import static com.wtoe.rtmpdump4android.flv.FlvPackerHelper.PRE_SIZE;
+import static com.wtoe.rtmpdump4android.flv.FlvPackerHelper.VIDEO_HEADER_SIZE;
+import static com.wtoe.rtmpdump4android.flv.FlvPackerHelper.VIDEO_SPECIFIC_CONFIG_EXTEND_SIZE;
 
 
 /**

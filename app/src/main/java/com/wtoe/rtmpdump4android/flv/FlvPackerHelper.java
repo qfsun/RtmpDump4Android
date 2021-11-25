@@ -1,6 +1,6 @@
-package com.wtoe.rtmptest.flv;
-import com.wtoe.rtmptest.flv.amf.AmfMap;
-import com.wtoe.rtmptest.flv.amf.AmfString;
+package com.wtoe.rtmpdump4android.flv;
+import com.wtoe.rtmpdump4android.flv.amf.AmfMap;
+import com.wtoe.rtmpdump4android.flv.amf.AmfString;
 import java.nio.ByteBuffer;
 
 /**

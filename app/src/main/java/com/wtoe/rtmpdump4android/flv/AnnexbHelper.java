@@ -1,4 +1,4 @@
-package com.wtoe.rtmptest.flv;
+package com.wtoe.rtmpdump4android.flv;
 
 import android.media.MediaCodec;
 

@@ -1,4 +1,4 @@
-package com.wtoe.rtmptest.flv.amf;
+package com.wtoe.rtmpdump4android.flv.amf;
 
 import java.util.HashMap;
 import java.util.Map;
